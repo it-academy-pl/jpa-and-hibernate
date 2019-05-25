@@ -24,6 +24,16 @@ public class Student {
     @Column(name = "last_login")
     private Date lastLogin;
 
+    public Student() {
+    }
+
+    public Student(String name, String surname, String email, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+    }
+
     public long getId() {
         return id;
     }
