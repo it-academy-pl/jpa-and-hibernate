@@ -1,4 +1,5 @@
 import domain.Student;
+import domain.Tutor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -27,10 +28,8 @@ public class Main {
         EntityTransaction tx_jpa = em.getTransaction();
         tx_jpa.begin();
 
-        Student student = new Student("nowy", "student", "email", "password");
-
-        em.persist(student);
-        student.getId();
+        Tutor tutor = em.find(Tutor.class, 1L);
+        System.out.println(tutor);
 
         tx_jpa.commit();
         em.getEntityManagerFactory().close();
