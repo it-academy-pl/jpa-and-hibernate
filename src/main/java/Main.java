@@ -1,3 +1,4 @@
+import domain.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,10 +32,14 @@ public class Main {
         EntityManagerFactory emf = Persistence
                 .createEntityManagerFactory("JPAExamples");
         EntityManager em = emf.createEntityManager();
-        EntityTransaction txx = em.getTransaction();
-        tx.begin();
+        EntityTransaction tx_jpa = em.getTransaction();
+        tx_jpa.begin();
 
-        tx.commit();
+
+        Student student = em.find(Student.class, 2L);
+        System.out.println(student);
+
+        tx_jpa.commit();
         em.close();
     }
 
