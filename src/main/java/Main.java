@@ -39,11 +39,6 @@ public class Main {
         em.close();
     }
 
-    private static void createNewStudent(EntityManager em) {
-        Student student = new Student("jpa", "student", "jpa@text.com", "password", new Date());
-        em.persist(student);
-
-    }
 
     public static SessionFactory getSessionFactory()
     {
