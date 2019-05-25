@@ -27,6 +27,18 @@ public class Tutor {
     @Column(name="email")
     private String email;
 
+    @OneToMany
+            @JoinColumn(name="tutor_id")
+    List<Student> students;
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
     public Tutor() {
     }
 

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 @Entity(name = "STUDENTS")
@@ -23,6 +25,18 @@ public class Student {
     private String password;
     @Column(name = "last_login")
     private Date lastLogin;
+
+    @ManyToOne
+    @JoinColumn(name="tutor_id")
+    private Tutor tutor;
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
 
     public Student() {
     }
