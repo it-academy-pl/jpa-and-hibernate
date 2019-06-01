@@ -27,8 +27,7 @@ public class Tutor {
     @Column(name="email")
     private String email;
 
-    @OneToMany
-            @JoinColumn(name="tutor_id")
+    @OneToMany(mappedBy = "tutor", fetch = FetchType.EAGER)
     List<Student> students;
 
     public List<Student> getStudents() {
@@ -36,7 +35,7 @@ public class Tutor {
     }
 
     public void setStudents(List<Student> students) {
-        this.students = students;
+        this.students = students;;
     }
 
     public Tutor() {

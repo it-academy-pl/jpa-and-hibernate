@@ -26,6 +26,7 @@ public class Student {
     @Column(name = "last_login")
     private Date lastLogin;
 
+
     @ManyToOne
     @JoinColumn(name="tutor_id")
     private Tutor tutor;

@@ -1,44 +1,42 @@
-import domain.Student;
-import domain.Tutor;
-import org.hibernate.SessionFactory;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.*;
 
 public class Main {
 
-    private static SessionFactory sessionFactory = null;
+    public static EntityManagerFactory emf = Persistence
+            .createEntityManagerFactory("JPAExamples");
 
     public static void main(String[] args) {
 
-        //JPA
-        EntityManagerFactory emf = Persistence
-                .createEntityManagerFactory("JPAExamples");
         EntityManager em = emf.createEntityManager();
-        EntityTransaction tx_jpa = em.getTransaction();
-        tx_jpa.begin();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+/*
+        Student student = new Student("name", "surname", "email", "password");
+        em.persist(student);
+*/
+        //JPQL queries
+/*        Query query = em.createQuery("select s from STUDENTS s");
+        List<Student> students = query.getResultList();
+        //query.setParameter("email", "kowalski@onet.pl");
+        System.out.println(students.toString());
+        System.out.println("-----------");*/
 
-        Tutor tutor = em.find(Tutor.class, 1L);
-        List<Student> students = tutor.getStudents();
-        System.out.println(tutor);
 
-        for(Student student : students) {
-            System.out.println(student);
-        }
+        //Criteria query
+/*        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Student> criteria = builder.createQuery(Student.class);
+        Root<Student> root = criteria.from(Student.class);
+        criteria.where(builder.equal(root.get("email"), "123@a.pl"));
+        Query q = em.createQuery(criteria);
+        Student student = (Student) q.getSingleResult();
+        System.out.println(student);*/
 
-        System.out.println("---------------");
+        tx.commit();
+        em.close();
+        emf.close();
 
-        Student student = em.find(Student.class, 2L);
-        Tutor tutor1 = student.getTutor();
-        System.out.println("---tutor for student 2---" + tutor1);
-        tx_jpa.commit();
-        em.getEntityManagerFactory().close();
     }
-
-
-
-
 }
